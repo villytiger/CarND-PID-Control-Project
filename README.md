@@ -3,6 +3,26 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
+## Solution
+
+I used PID controller for steering values and P controller for throttle values.
+
+P component is needed for controling steering angle in proportion to the crosstrack error. P controller without other components is subjected to steady oscillations. This is why we need D component which is related to temporal derivative of the crosstack error.
+
+There is also I component that is supposed to compensate systematic bias by summing all observed crasstrack errors. But I didn't find any posistive effect from it in this project.
+
+I've implemented twiddle algorithm for tuning my PID controller. After manually choosing parameters so that the car could be able to get to the bridge, I ran twiddle for finding optimal parameters. There are many local minimas, so intial values affect final ones.
+
+For controlling throttle I just used simple P controller which keeps specified fixed speed.
+
+At the end I got PID controller which is able to drive safely with speed of 50 mph. I couldn't successfully run native simulator on Linux, so I used Windows simulator on Wine. It doesn't work well. Even changing resolution leads to inability for PID controller to drive within a road. So I couldn't tune PID controller to drive with speed above 50 mph.
+
+Please find below video of the simulation at a speed of 50 mph.
+
+[![Video](https://img.youtube.com/vi/onUKYGenhT4/0.jpg)](https://youtu.be/onUKYGenhT4)
+
+---
+
 ## Dependencies
 
 * cmake >= 3.5
